@@ -10,7 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import TutorialDataService from "../services/tutorial.service";
+import PvuDataService from "../services/pvu.service";
 
 const mdTheme = createTheme();
 
@@ -19,6 +19,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       tokenPrice: {price: '0'},
+      data: {},
       time: '',
       dates: []
     };
@@ -26,49 +27,15 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.load()
-    
-    var data = {
-      title: "title",
-      description: "descript"
-    };
 
-    TutorialDataService.create(data)
+    PvuDataService.getHomePageData()
       .then(response => {
-        this.setState({
-          id: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-          published: response.data.published,
-
-          submitted: true
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-
-    TutorialDataService.getAll()
-      .then(response => {
-        this.setState({
-          tutorials: response.data
-        });
-        console.log(response.data);
+        this.setState({data: response.data})
       })
       .catch(e => {
         console.log(e);
       });
   }
-  
-  callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  };
 
   load = () => {
     /*let time = new Date('2021/09/22 01:25:00 +0000')
@@ -119,9 +86,6 @@ class Home extends React.Component {
     }
     if(hours < 10) {hours = '0' + hours}
     this.setState({time: hours + ':' + minutes, dates})*/
-	this.callBackendAPI()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
     var url = "https://api.pancakeswap.info/api/v2/tokens/0x31471e0791fcdbe82fbf4c44943255e923f1b794";
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
@@ -138,7 +102,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { tokenPrice, time, dates } = this.state;
+    const { tokenPrice, time, dates, data } = this.state;
     return (
       <ThemeProvider theme={mdTheme}>
         <Box sx={{ display: 'flex' }}>
@@ -189,13 +153,13 @@ class Home extends React.Component {
                     <TableCell align='center'>1 PVU = {Number(tokenPrice.price).toFixed(2)} $</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>1 PVU = 105 LE</TableCell>
+                    <TableCell align='center'>1 PVU = {data.pvuToLe} LE</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>500 LE = 1 PVU</TableCell>
+                    <TableCell align='center'>{data.leToPvu} LE = 1 PVU</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>550 LE = 1 PVU (from 27.09)</TableCell>
+                    <TableCell align='center'>{data.nextLeToPvu} LE = 1 PVU (from {data.date})</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

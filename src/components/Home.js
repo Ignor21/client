@@ -1,5 +1,4 @@
 import React from 'react';
-import './Home.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -11,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import TutorialDataService from "../services/tutorial.service";
 
 const mdTheme = createTheme();
 
@@ -26,6 +26,38 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.load()
+    
+    var data = {
+      title: "title",
+      description: "descript"
+    };
+
+    TutorialDataService.create(data)
+      .then(response => {
+        this.setState({
+          id: response.data.id,
+          title: response.data.title,
+          description: response.data.description,
+          published: response.data.published,
+
+          submitted: true
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+    TutorialDataService.getAll()
+      .then(response => {
+        this.setState({
+          tutorials: response.data
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
   
   callBackendAPI = async () => {

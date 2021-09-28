@@ -13,12 +13,12 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css';
-import Home from "./Home/Home.js";
-import PlantInfo from "./PlantInfo/PlantInfo.js";
-import FarmCalculator from "./FarmCalculator/FarmCalculator.js";
-import Weather from "./Weather/Weather.js";
-import News from "./News/News.js";
-import Info from "./Info/Info.js";
+import Home from "./components/Home.js";
+import PlantInfo from "./components/PlantInfo.js";
+import FarmCalculator from "./components/FarmCalculator.js";
+import Weather from "./components/Weather.js";
+import News from "./components/News.js";
+import Info from "./components/Info.js";
 
 const theme = createTheme();
 
@@ -35,7 +35,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    console.log(props)
   }
 
   render() {

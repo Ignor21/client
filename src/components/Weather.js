@@ -1,5 +1,4 @@
 import React from 'react';
-import './Weather.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -24,8 +23,8 @@ class Weather extends React.Component {
     super(props);
     this.state = {
       tokenPrice: {},
-      currentSeason: 'Winter',
-      season: 'Winter'
+      currentSeason: 'Spring',
+      season: 'Spring'
     };
   }
 
@@ -81,7 +80,7 @@ class Weather extends React.Component {
               Weather for {calendar[0].date}
             </Typography>
             <Typography variant="h6">
-              Today is the 6th day of {currentSeason}
+              Today is the 2th day of {currentSeason}
             </Typography>
             <Typography variant="h6">
               Weather event: {calendar[0].weather}
@@ -195,6 +194,12 @@ class Weather extends React.Component {
 export default Weather;
 
 const calendar = [
+  {
+    date: '28.09.2021',
+    season: 'Spring',
+    weather: 'Iron Rain',
+    effect: '+120% Metal, +40% Water'
+  },
   {
     date: '27.09.2021',
     season: 'Spring',

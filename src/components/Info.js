@@ -1,5 +1,4 @@
 import React from 'react';
-import './Info.css';
 import { createTheme, ThemeProvider, styled  } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';

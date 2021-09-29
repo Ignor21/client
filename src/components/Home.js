@@ -30,6 +30,7 @@ class Home extends React.Component {
 
     PvuDataService.getHomePageData()
       .then(response => {
+        console.log(response)
         this.setState({data: response.data})
       })
       .catch(e => {

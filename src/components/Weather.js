@@ -227,7 +227,7 @@ const calendar = [
   {
     date: '24.09.2021',
     season: 'Winter',
-    weather: 'Cold wave',
+    weather: 'Cold Wave',
     effect: '+120% Ice, -60% Fire'
   },
   {
@@ -375,14 +375,14 @@ const weather = {
       }
     },
     {
-      title: 'Iron rain',
+      title: 'Iron Rain',
       effects: {
         Metal: '+120%',
         Water: '+40%',
       }
     },
     {
-      title: 'Locusts swarm',
+      title: 'Locusts Swarm',
       effects: {
         Parasite: '+100%',
       }
@@ -480,7 +480,7 @@ const weather = {
       }
     },
     {
-      title: 'Locusts swarm',
+      title: 'Locusts Swarm',
       effects: {
         Parasite: '+100%',
       }
@@ -608,14 +608,14 @@ const weather = {
       }
     },
     {
-      title: 'Iron rain',
+      title: 'Iron Rain',
       effects: {
         Metal: '+120%',
         Water: '+40%',
       }
     },
     {
-      title: 'Locusts swarm',
+      title: 'Locusts Swarm',
       effects: {
         Parasite: '+100%',
       }

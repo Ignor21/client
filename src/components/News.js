@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import PvuDataService from "../services/pvu.service";
 
 const mdTheme = createTheme();
 
@@ -33,11 +34,20 @@ class News extends React.Component {
       tokenPrice: {},
       id: 1012311552,
       tokenInfo: {id: 23, img: '1', rarity: '15'},
+      data: []
     };
   }
 
   componentDidMount() {
     this.load()
+
+    PvuDataService.getHomePageData()
+      .then(response => {
+        this.setState({data: response.data})
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   load = () => {

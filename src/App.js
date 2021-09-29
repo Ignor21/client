@@ -18,7 +18,8 @@ import PlantInfo from "./components/PlantInfo.js";
 import FarmCalculator from "./components/FarmCalculator.js";
 import Weather from "./components/Weather.js";
 import News from "./components/News.js";
-import Info from "./components/Info.js";
+import WorldTree from "./components/WorldTree.js";
+import Marketplace from "./components/Marketplace.js";
 
 const theme = createTheme();
 
@@ -28,7 +29,8 @@ const sections = [
   { title: 'Farm Calculator', url: '/farmCalculator' },
   { title: 'Weather', url: '/weather' },
   { title: 'News', url: '/news' },
-  { title: 'Info', url: '/info' },
+  { title: 'WorldTree', url: '/worldTree' },
+  { title: 'Marketplace', url: '/marketplace' },
 ]
 
 class App extends React.Component {
@@ -90,8 +92,11 @@ class App extends React.Component {
               <Route path="/news">
                 <News />
               </Route>
-              <Route path="/info">
-                <Info />
+              <Route path="/worldTree">
+                <WorldTree />
+              </Route>
+              <Route path="/marketplace">
+                <Marketplace />
               </Route>
               <Route path="/">
                 <Home />

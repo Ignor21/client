@@ -80,7 +80,7 @@ class Weather extends React.Component {
               Weather for {calendar[0].date}
             </Typography>
             <Typography variant="h6">
-              Today is the 2th day of {currentSeason}
+              Today is the 4th day of {currentSeason}
             </Typography>
             <Typography variant="h6">
               Weather event: {calendar[0].weather}
@@ -194,6 +194,12 @@ class Weather extends React.Component {
 export default Weather;
 
 const calendar = [
+  {
+    date: '29.09.2021',
+    season: 'Spring',
+    weather: 'Sunny',
+    effect: '+60% Fire, -30% Water'
+  },
   {
     date: '28.09.2021',
     season: 'Spring',

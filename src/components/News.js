@@ -41,7 +41,7 @@ class News extends React.Component {
   componentDidMount() {
     this.load()
 
-    PvuDataService.getHomePageData()
+    PvuDataService.getNews()
       .then(response => {
         this.setState({data: response.data})
       })

@@ -32,7 +32,7 @@ class WorldTree extends React.Component {
   componentDidMount() {
     this.load()
 
-    PvuDataService.getHomePageData()
+    PvuDataService.getWorldTreeData()
       .then(response => {
         console.log(response.data)
         this.setState({data: response.data})

@@ -150,16 +150,32 @@ class Home extends React.Component {
               <Table size="small">
                 <TableBody>
                   <TableRow>
-                    <TableCell align='center'>1 PVU = {Number(tokenPrice.price).toFixed(2)} $</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        1 PVU = {Number(tokenPrice.price).toFixed(2)} $
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>1 PVU = {data.pvuToLe} LE</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        1 PVU = {data.pvuToLe} LE
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>{data.leToPvu} LE = 1 PVU</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {data.leToPvu} LE = 1 PVU
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>{data.nextLeToPvu} LE = 1 PVU (from {data.date})</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {data.nextLeToPvu} LE = 1 PVU (from {data.date})
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

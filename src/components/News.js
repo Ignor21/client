@@ -63,7 +63,7 @@ class News extends React.Component {
                 <Typography align='left' variant="subtitle2" gutterBottom>
                   {item.date}
                 </Typography>
-                <Typography style={{whiteSpace: 'pre-line'}} align='left' variant="body1">
+                <Typography style={{whiteSpace: 'pre-line'}} align='left' variant="subtitle2">
                   {item.text}
                 </Typography>
               </Box>

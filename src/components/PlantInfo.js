@@ -9,6 +9,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const mdTheme = createTheme();
 
@@ -129,30 +130,76 @@ class PlantInfo extends React.Component {
               <Table size="small">
                 <TableBody>
                   <TableRow>
-                    <TableCell align='center'>Type: </TableCell>
-                    <TableCell align='center'>{tokenInfo.type}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell align='center'>Rarity: </TableCell>
                     <TableCell align='center'>
-                      <p style={{color: tokenInfo.rarity.color}}>{tokenInfo.rarity.rarityType}</p>
+                      <Typography variant="subtitle2">
+                        Type:
+                      </Typography>
+                    </TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {tokenInfo.type}
+                      </Typography>
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>Element: </TableCell>
-                    <TableCell align='center'>{tokenInfo.element}</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        Rarity:
+                      </Typography>
+                    </TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2" style={{color: tokenInfo.rarity.color}}>
+                        {tokenInfo.rarity.rarityType}
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>LE: </TableCell>
-                    <TableCell align='center'>{tokenInfo.le} / {tokenInfo.hour} hours</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        Element:
+                      </Typography>
+                    </TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {tokenInfo.element}
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>LE per hour: </TableCell>
-                    <TableCell align='center'>{(tokenInfo.le/Number(tokenInfo.hour)).toFixed(2)}</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        LE:
+                      </Typography>
+                    </TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {tokenInfo.le} / {tokenInfo.hour} hours
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell align='center'>LE per day: </TableCell>
-                    <TableCell align='center'>{((tokenInfo.le/Number(tokenInfo.hour))*24).toFixed(2)}</TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        LE per hour:
+                      </Typography>
+                    </TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {(tokenInfo.le/Number(tokenInfo.hour)).toFixed(2)}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        LE per day:
+                      </Typography>
+                    </TableCell>
+                    <TableCell align='center'>
+                      <Typography variant="subtitle2">
+                        {((tokenInfo.le/Number(tokenInfo.hour))*24).toFixed(2)}
+                      </Typography>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

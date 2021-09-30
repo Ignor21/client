@@ -12,6 +12,10 @@ class PvuDataService {
   getWorldTreeData() {
     return http.get("/getWorldTreeData");
   }
+
+  getWeatherHistory() {
+    return http.get("/getWeatherHistory");
+  }
 }
 
 export default new PvuDataService();

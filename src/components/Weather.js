@@ -12,6 +12,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import PvuDataService from "../services/pvu.service";
 
 const mdTheme = createTheme();
 
@@ -24,12 +25,22 @@ class Weather extends React.Component {
     this.state = {
       tokenPrice: {},
       currentSeason: 'Spring',
-      season: 'Spring'
+      season: 'Spring',
+      data: []
     };
   }
 
   componentDidMount() {
     this.load()
+
+    PvuDataService.getWeatherHistory()
+      .then(response => {
+        console.log(response.data)
+        this.setState({data: response.data})
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   load = () => {

@@ -108,7 +108,7 @@ class WorldTree extends React.Component {
                 <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                   {data.reward[3].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
                   <Typography align='left' display="inline" variant="body1">
-                    R4: 1 Sun Box<Tooltip title={longText} placement="top-start" enterTouchDelay={50}><Info fontSize="small" /></Tooltip>({data.reward[3].target.toLocaleString('fr')})
+                    R4: 1 Sun Box<Tooltip title={longText} placement="top-start" enterTouchDelay={50} leaveTouchDelay={10000}><Info fontSize="small" /></Tooltip>({data.reward[3].target.toLocaleString('fr')})
                   </Typography>
                 </Box>
                 <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>

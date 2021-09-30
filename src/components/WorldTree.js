@@ -10,6 +10,8 @@ import Grid from '@mui/material/Grid';
 import PvuDataService from "../services/pvu.service";
 import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBox from '@material-ui/icons/CheckBox';
+import Info from '@material-ui/icons/Info';
+import Tooltip from '@mui/material/Tooltip';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -19,6 +21,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const mdTheme = createTheme();
+
+const longText = <span style={{ whiteSpace: 'pre-line' }}>SUN BOX<br />30% to drop: 20 x scarecrows and 100 x water<br />30% to drop: 2 x small pots<br />30% to drop: 1 x sunflower sapling<br />9.9% to drop: 1 x sunflower mama<br />0.1% to drop: 1 x seed</span>
 
 class WorldTree extends React.Component {
   constructor(props) {
@@ -104,7 +108,7 @@ class WorldTree extends React.Component {
                 <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                   {data.reward[3].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
                   <Typography align='left' display="inline" variant="body1">
-                    R4: 1 Sun Box ({data.reward[3].target.toLocaleString('fr')})
+                    R4: 1 Sun Box<Tooltip title={longText} placement="top-start"><Info fontSize="small" /></Tooltip>({data.reward[3].target.toLocaleString('fr')})
                   </Typography>
                 </Box>
                 <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>

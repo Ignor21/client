@@ -24,9 +24,11 @@ class Weather extends React.Component {
     super(props);
     this.state = {
       tokenPrice: {},
-      currentSeason: 'Spring',
-      season: 'Spring',
-      data: []
+      currentSeason: '',
+      season: '',
+      tommorowSeason: '',
+      currentDay: 0,
+      data: [{date: '', season: '', weather: '', effect: ''}, {date: '', season: '', weather: '', effect: ''}]
     };
   }
 
@@ -35,8 +37,21 @@ class Weather extends React.Component {
 
     PvuDataService.getWeatherHistory()
       .then(response => {
-        console.log(response.data)
-        this.setState({data: response.data})
+        let day = 0
+        let seasonNow = response.data[0].season
+        response.data.forEach(element => {
+          if(element.season === seasonNow){
+            day += 1
+          }
+        })
+        let tommorowSeason = seasonNow
+        if(day === 7){
+          if(seasonNow === 'Winter') {tommorowSeason = 'Spring'}
+          if(seasonNow === 'Spring') {tommorowSeason = 'Summer'}
+          if(seasonNow === 'Summer') {tommorowSeason = 'Autumn'}
+          if(seasonNow === 'Autumn') {tommorowSeason = 'Winter'}
+        }
+        this.setState({data: response.data, currentSeason: seasonNow, season: tommorowSeason, currentDay: day, tommorowSeason: tommorowSeason})
       })
       .catch(e => {
         console.log(e);
@@ -59,6 +74,21 @@ class Weather extends React.Component {
     xhr.send();
   }
 
+  ordinal_suffix_of = (i) => {
+    let j = i % 10,
+        k = i % 100;
+    if (j === 1 && k !== 11) {
+        return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+        return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+        return i + "rd";
+    }
+    return i + "th";
+  }
+
   setSeason = (season) => {
     switch (season) {
       case 'Winter':
@@ -79,25 +109,26 @@ class Weather extends React.Component {
   }
 
   render() {
-    const { season, currentSeason } = this.state;
-    const w1 = calendar[0].weather;
-    const w2 = calendar[1].weather;
+    const { season, currentSeason, data, currentDay, tommorowSeason } = this.state;
+    const w1 = data[0].weather;
+    const w2 = data[1].weather;
     return (
       <ThemeProvider theme={mdTheme}>
+      {season !== '' &&
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Container align='center' component="main" sx={{ mt: 4, mb: 2 }} maxWidth="md">
             <Typography variant="h4">
-              Weather for {calendar[0].date}
+              Weather for {data[0].date}
             </Typography>
             <Typography variant="h6">
-              Today is the 4th day of {currentSeason}
+              Today is the {this.ordinal_suffix_of(currentDay)} {currentDay === 7 && '(last)'} day of {currentSeason}
             </Typography>
             <Typography variant="h6">
-              Weather event: {calendar[0].weather}
+              Weather event: {data[0].weather}
             </Typography>
             <Typography variant="h6">
-              Effect from event: {calendar[0].effect}
+              Effect from event: {data[0].effect}
             </Typography>
             <Box sx={{mt: 2}} />
             <Divider />
@@ -108,7 +139,7 @@ class Weather extends React.Component {
                 <Button sx={{ml: 1}} variant={season === 'Summer' ? "contained" : "outlined"} size='small' onClick={() => this.setSeason('Summer')}>Summer</Button>
                 <Button sx={{ml: 1}} variant={season === 'Autumn' ? "contained" : "outlined"} size='small' onClick={() => this.setSeason('Autumn')}>Autumn</Button>
               </Container>
-              {season === currentSeason &&
+              {season === tommorowSeason &&
                 <Box sx={{mt: 1}}>
                   <Typography variant="h6">
                     Possible tomorrow
@@ -138,34 +169,34 @@ class Weather extends React.Component {
                       return (
                       <TableRow>
                         <TableCell align='center'>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{tit}</s> : tit}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{tit}</s> : tit}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Fire) ? '#4caf50' : negArray.includes(eff.Fire) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Fire ? eff.Fire : '0%'}</s> : eff.Fire ? eff.Fire : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Fire ? eff.Fire : '0%'}</s> : eff.Fire ? eff.Fire : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Ice) ? '#4caf50' : negArray.includes(eff.Ice) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Ice ? eff.Ice : '0%'}</s> : eff.Ice ? eff.Ice : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Ice ? eff.Ice : '0%'}</s> : eff.Ice ? eff.Ice : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Water) ? '#4caf50' : negArray.includes(eff.Water) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Water ? eff.Water : '0%'}</s> : eff.Water ? eff.Water : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Water ? eff.Water : '0%'}</s> : eff.Water ? eff.Water : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Electro) ? '#4caf50' : negArray.includes(eff.Electro) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Electro ? eff.Electro : '0%'}</s> : eff.Electro ? eff.Electro : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Electro ? eff.Electro : '0%'}</s> : eff.Electro ? eff.Electro : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Wind) ? '#4caf50' : negArray.includes(eff.Wind) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Wind ? eff.Wind : '0%'}</s> : eff.Wind ? eff.Wind : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Wind ? eff.Wind : '0%'}</s> : eff.Wind ? eff.Wind : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Light) ? '#4caf50' : negArray.includes(eff.Light) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Light ? eff.Light : '0%'}</s> : eff.Light ? eff.Light : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Light ? eff.Light : '0%'}</s> : eff.Light ? eff.Light : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Dark) ? '#4caf50' : negArray.includes(eff.Dark) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Dark ? eff.Dark : '0%'}</s> : eff.Dark ? eff.Dark : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Dark ? eff.Dark : '0%'}</s> : eff.Dark ? eff.Dark : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Parasite) ? '#4caf50' : negArray.includes(eff.Parasite) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Parasite ? eff.Parasite : '0%'}</s> : eff.Parasite ? eff.Parasite : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Parasite ? eff.Parasite : '0%'}</s> : eff.Parasite ? eff.Parasite : '0%'}
                         </TableCell>
                         <TableCell align='center' style={{color: posArray.includes(eff.Metal) ? '#4caf50' : negArray.includes(eff.Metal) && '#ef5350'}}>
-                          {(tit === w1 || tit === w2) && season === currentSeason ? <s>{eff.Metal ? eff.Metal : '0%'}</s> : eff.Metal ? eff.Metal : '0%'}
+                          {(tit === w1 || tit === w2) && season === tommorowSeason ? <s>{eff.Metal ? eff.Metal : '0%'}</s> : eff.Metal ? eff.Metal : '0%'}
                         </TableCell>
                       </TableRow>
                     )})}
@@ -177,7 +208,7 @@ class Weather extends React.Component {
               <Typography variant="h6">
                 History
               </Typography>
-              {calendar.map((item, index) => (
+              {data.map((item, index) => (
                 index !== 0 &&
                   <Box sx={{mb: 1, mt: 2}}>
                     <Box sx={{mb: 1}}>
@@ -197,87 +228,13 @@ class Weather extends React.Component {
             </Box>
           </Container>
         </Box>
+      }
       </ThemeProvider>
     );
   }
 }
 
 export default Weather;
-
-const calendar = [
-  {
-    date: '29.09.2021',
-    season: 'Spring',
-    weather: 'Sunny',
-    effect: '+60% Fire, -30% Water'
-  },
-  {
-    date: '28.09.2021',
-    season: 'Spring',
-    weather: 'Iron Rain',
-    effect: '+120% Metal, +40% Water'
-  },
-  {
-    date: '27.09.2021',
-    season: 'Spring',
-    weather: 'Volcano',
-    effect: '+100% Fire, +40% Metal, -40% Ice, -20% Water'
-  },
-  {
-    date: '26.09.2021',
-    season: 'Spring',
-    weather: 'Hurricane',
-    effect: '+40% Wind, +40% Electro, +50% Water, +40% Ice, +40% Dark, -40% Fire, -20% Light'
-  },
-  {
-    date: '25.09.2021',
-    season: 'Winter',
-    weather: 'Earthquake',
-    effect: '+100% Metal, +50% Wind'
-  },
-  {
-    date: '24.09.2021',
-    season: 'Winter',
-    weather: 'Cold Wave',
-    effect: '+120% Ice, -60% Fire'
-  },
-  {
-    date: '23.09.2021',
-    season: 'Winter',
-    weather: 'Solar Flares',
-    effect: '+80% Fire, +80% Light'
-  },
-  {
-    date: '22.09.2021',
-    season: 'Winter',
-    weather: 'Coronal Mass Ejection',
-    effect: '+100% Light, +40% Fire'
-  },
-  {
-    date: '21.09.2021',
-    season: 'Winter',
-    weather: 'Magnetic Reconnection',
-    effect: '+50% Electro, +50% Metal'
-  },
-  {
-    date: '20.09.2021',
-    season: 'Winter',
-    weather: 'Cold Wave',
-    effect: '+120% Ice, -60% Fire'
-  },
-  {
-    date: '19.09.2021',
-    season: 'Winter',
-    weather: 'Snowy',
-    effect: '+100% Ice, +60% Water, -40% Fire'
-  },
-  {
-    date: '18.09.2021',
-    season: 'Autumn',
-    weather: 'Sunny',
-    effect: '+60% Fire, -30% Water'
-  }
-]
 
 const weather = {
   Winter: [

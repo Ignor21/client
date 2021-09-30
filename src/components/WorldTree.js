@@ -8,6 +8,8 @@ import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import PvuDataService from "../services/pvu.service";
+import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBox from '@material-ui/icons/CheckBox';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -82,22 +84,22 @@ class WorldTree extends React.Component {
                   Rewards:
                 </Typography>
                 <Typography align='left' variant="body1">
-                  {data.reward[0].target < data.totalWater && '\/ '}R1: 10 LE ({data.reward[0].target})
+                  {data.reward[0].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R1: 10 LE ({data.reward[0].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  {data.reward[1].target < data.totalWater && '\/ '}R2: 15 LE ({data.reward[1].target})
+                  {data.reward[1].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R2: 15 LE ({data.reward[1].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  {data.reward[2].target < data.totalWater && '\/ '}R3: 25 LE ({data.reward[2].target})
+                  {data.reward[2].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R3: 25 LE ({data.reward[2].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  {data.reward[3].target < data.totalWater && '\/ '}R4: 1 Sun Box ({data.reward[3].target})
+                  {data.reward[3].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R4: 1 Sun Box ({data.reward[3].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  {data.reward[4].target < data.totalWater && '\/ '}R5: Every plant is automatically fully watered for the next day (not available) + 50 LE ({data.reward[4].target})
+                  {data.reward[4].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R5: Every plant is automatically fully watered for the next day (not available) + 50 LE ({data.reward[4].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  {data.reward[5].target < data.totalWater && '\/ '}R6: 4 saplings ({data.reward[5].target})
+                  {data.reward[5].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R6: 4 saplings ({data.reward[5].target})
                 </Typography>
               </Grid>
             </Grid>

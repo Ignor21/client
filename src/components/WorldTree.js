@@ -59,6 +59,7 @@ class WorldTree extends React.Component {
   }
 
   render() {
+    const { data } = this.state;
     return (
       <ThemeProvider theme={mdTheme}>
         <Box sx={{ display: 'flex' }}>
@@ -75,25 +76,28 @@ class WorldTree extends React.Component {
               </Grid>
               <Grid item xs={6}>
                 <Typography align='left' variant="h6">
+                  Current water: {data.totalWater}
+                </Typography>
+                <Typography align='left' variant="h6">
                   Rewards:
                 </Typography>
                 <Typography align='left' variant="body1">
-                  R1: 10 LE
+                  {data.reward[0].target < data.totalWater && '\/ '}R1: 10 LE ({data.reward[0].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  R2: 15 LE
+                  {data.reward[1].target < data.totalWater && '\/ '}R2: 15 LE ({data.reward[1].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  R3: 25 LE
+                  {data.reward[2].target < data.totalWater && '\/ '}R3: 25 LE ({data.reward[2].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  R4: 1 Sun Box
+                  {data.reward[3].target < data.totalWater && '\/ '}R4: 1 Sun Box ({data.reward[3].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  R5: Every plant is automatically fully watered for the next day (not available) + 50 LE
+                  {data.reward[4].target < data.totalWater && '\/ '}R5: Every plant is automatically fully watered for the next day (not available) + 50 LE ({data.reward[4].target})
                 </Typography>
                 <Typography align='left' variant="body1">
-                  R6: 4 saplings
+                  {data.reward[5].target < data.totalWater && '\/ '}R6: 4 saplings ({data.reward[5].target})
                 </Typography>
               </Grid>
             </Grid>

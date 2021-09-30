@@ -25,7 +25,7 @@ class WorldTree extends React.Component {
       tokenPrice: {},
       id: 1012311552,
       tokenInfo: {id: 23, img: '1', rarity: '15'},
-      data: {}
+      data: { reward: [{target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}] }
     };
   }
 

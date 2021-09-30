@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import PvuDataService from "../services/pvu.service";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -24,11 +25,21 @@ class WorldTree extends React.Component {
       tokenPrice: {},
       id: 1012311552,
       tokenInfo: {id: 23, img: '1', rarity: '15'},
+      data: {}
     };
   }
 
   componentDidMount() {
     this.load()
+
+    PvuDataService.getHomePageData()
+      .then(response => {
+        console.log(response.data)
+        this.setState({data: response.data})
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   load = () => {

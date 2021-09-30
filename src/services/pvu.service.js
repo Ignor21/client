@@ -8,6 +8,10 @@ class PvuDataService {
   getNews() {
     return http.get("/getNews");
   }
+
+  getWorldTreeData() {
+    return http.get("/getWorldTreeData");
+  }
 }
 
 export default new PvuDataService();

@@ -27,7 +27,7 @@ class WorldTree extends React.Component {
       tokenPrice: {},
       id: 1012311552,
       tokenInfo: {id: 23, img: '1', rarity: '15'},
-      data: { reward: [{target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}] }
+      data: { totalWater: 0, reward: [{target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}, {target: 1000000000}] }
     };
   }
 
@@ -68,7 +68,7 @@ class WorldTree extends React.Component {
           <CssBaseline />
           <Container align='center' component="main" sx={{ mt: 4, mb: 2 }} maxWidth="md">
             <Grid container spacing={2} sx={{mt: 1, height: 290}}>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 <img
                   src={'images/world_tree.png'}
                   alt={'World Tree'}
@@ -76,31 +76,49 @@ class WorldTree extends React.Component {
                   height={250}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 <Typography align='left' variant="h6">
-                  Current water: {data.totalWater}
+                  Current water: {data.totalWater.toLocaleString('fr')}
                 </Typography>
                 <Typography align='left' variant="h6">
                   Rewards:
                 </Typography>
-                <Typography align='left' variant="body1">
-                  {data.reward[0].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R1: 10 LE ({data.reward[0].target})
-                </Typography>
-                <Typography align='left' variant="body1">
-                  {data.reward[1].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R2: 15 LE ({data.reward[1].target})
-                </Typography>
-                <Typography align='left' variant="body1">
-                  {data.reward[2].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R3: 25 LE ({data.reward[2].target})
-                </Typography>
-                <Typography align='left' variant="body1">
-                  {data.reward[3].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R4: 1 Sun Box ({data.reward[3].target})
-                </Typography>
-                <Typography align='left' variant="body1">
-                  {data.reward[4].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R5: Every plant is automatically fully watered for the next day (not available) + 50 LE ({data.reward[4].target})
-                </Typography>
-                <Typography align='left' variant="body1">
-                  {data.reward[5].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}R6: 4 saplings ({data.reward[5].target})
-                </Typography>
+                <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                  {data.reward[0].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
+                  <Typography align='left' display="inline" variant="body1">
+                    R1: 10 LE ({data.reward[0].target.toLocaleString('fr')})
+                  </Typography>
+                </Box>
+                <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                  {data.reward[1].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
+                  <Typography align='left' display="inline" variant="body1">
+                    R2: 15 LE ({data.reward[1].target.toLocaleString('fr')})
+                  </Typography>
+                </Box>
+                <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                  {data.reward[2].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
+                  <Typography align='left' display="inline" variant="body1">
+                    R3: 25 LE ({data.reward[2].target.toLocaleString('fr')})
+                  </Typography>
+                </Box>
+                <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                  {data.reward[3].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
+                  <Typography align='left' display="inline" variant="body1">
+                    R4: 1 Sun Box ({data.reward[3].target.toLocaleString('fr')})
+                  </Typography>
+                </Box>
+                <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                  {data.reward[4].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
+                  <Typography align='left' display="inline" variant="body1">
+                    R5: Every plant is automatically fully watered for the next day (not available) + 50 LE ({data.reward[4].target.toLocaleString('fr')})
+                  </Typography>
+                </Box>
+                <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                  {data.reward[5].target < data.totalWater ? <CheckBox /> : <CheckBoxOutlineBlank />}
+                  <Typography align='left' display="inline" variant="body1">
+                    R6: 4 saplings ({data.reward[5].target.toLocaleString('fr')})
+                  </Typography>
+                </Box>
               </Grid>
             </Grid>
           </Container>

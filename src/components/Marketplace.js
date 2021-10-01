@@ -10,6 +10,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import PvuDataService from "../services/pvu.service";
 
 const mdTheme = createTheme();
 
@@ -28,22 +29,17 @@ class Marketplace extends React.Component {
   }
 
   load = () => {
-    var url = "https://backend-farm.plantvsundead.com/get-plants-filter-v2?offset=0&limit=100000&type=1";
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    //xhr.setRequestHeader("authorization", "Bearer Token: ");
-    xhr.onload = function (e) {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          let plants = this.state.plants
-          plants = JSON.parse(xhr.responseText).data
-          plants.sort((a, b) => (b.config.farm.le / b.config.farm.hours) / b.endingPrice - (a.config.farm.le / a.config.farm.hours) / a.endingPrice);
-          let date = Date.parse(new Date()) / 1000;
-          this.setState({plants, date, loaded: true})
-        }
-      }
-    }.bind(this);
-    xhr.send();
+    PvuDataService.getWeatherHistory()
+      .then(response => {
+        let plants = this.state.plants
+        plants = response.data
+        plants.sort((a, b) => (b.config.farm.le / b.config.farm.hours) / b.endingPrice - (a.config.farm.le / a.config.farm.hours) / a.endingPrice);
+        let date = Date.parse(new Date()) / 1000;
+        this.setState({plants, date, loaded: true})
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   reload = () => {

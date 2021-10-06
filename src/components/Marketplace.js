@@ -33,7 +33,6 @@ class Marketplace extends React.Component {
       .then(response => {
         let plants = this.state.plants
         plants = response.data
-        plants.sort((a, b) => (b.config.farm.le / b.config.farm.hours) / b.endingPrice - (a.config.farm.le / a.config.farm.hours) / a.endingPrice);
         let date = Date.parse(new Date()) / 1000;
         this.setState({plants, date, loaded: true})
       })
@@ -104,7 +103,7 @@ class Marketplace extends React.Component {
               {loaded ?
                 <div>
                   <div className="Load">
-                    Seeds on market: {plants.length}
+                    {plants.length} new plants on marketplace
                   </div>
                   <div className="Load">
                   <Button onClick={this.reload} variant="outlined">Refresh</Button>
@@ -115,11 +114,11 @@ class Marketplace extends React.Component {
                         <TableCell align='center'><Button variant="text" onClick={() => this.sort('id')}>ID</Button></TableCell>
                         <TableCell align='center'><Button variant="text" disabled>Type</Button></TableCell>
                         <TableCell align='center'><Button variant="text" onClick={() => this.sort('price')}>Price</Button></TableCell>
-                        <TableCell align='center'><Button variant="text" onClick={() => this.sort('duration')}>Duration</Button></TableCell>
+                        <TableCell align='center'><Button variant="text" onClick={() => this.sort('duration')} endIcon={<ArrowDownward />}>Duration</Button></TableCell>
                         <TableCell align='center'><Button variant="text" onClick={() => this.sort('gain')}>LE / hours</Button></TableCell>
                         <TableCell align='center'><Button variant="text" onClick={() => this.sort('gain')}>LE per hour</Button></TableCell>
                         <TableCell align='center'><Button variant="text" onClick={() => this.sort('gain')}>LE per day</Button></TableCell>
-                        <TableCell align='center'><Button variant="text" onClick={() => this.sort('eff')} endIcon={<ArrowDownward />}>Return in days</Button></TableCell>
+                        <TableCell align='center'><Button variant="text" onClick={() => this.sort('eff')}>Return in days</Button></TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

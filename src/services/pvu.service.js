@@ -18,7 +18,7 @@ class PvuDataService {
   }
 
   getMarketplace() {
-    return http.get("/getMarketplace");
+    return http.get("/getMarketplace?limit=100");
   }
 }
 

@@ -16,6 +16,10 @@ class PvuDataService {
   getWeatherHistory() {
     return http.get("/getWeatherHistory");
   }
+
+  getMarketplace() {
+    return http.get("/getMarketplace");
+  }
 }
 
 export default new PvuDataService();

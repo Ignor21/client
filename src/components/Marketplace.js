@@ -29,7 +29,7 @@ class Marketplace extends React.Component {
   }
 
   load = () => {
-    PvuDataService.getWeatherHistory()
+    PvuDataService.getMarketplace()
       .then(response => {
         let plants = this.state.plants
         plants = response.data

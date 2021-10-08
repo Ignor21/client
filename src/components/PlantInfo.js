@@ -113,8 +113,8 @@ class PlantInfo extends React.Component {
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Container align='center' component="main" sx={{ mt: 4, mb: 2 }} maxWidth="md">
-            <TextField label="Plant ID" size='small' sx={{mr: 1}} type={'number'} value={id} onChange={(id) => this.setState({id: id.target.value})} />
-            <Button style={{height: '40px'}} sx={{ml: 1}} variant="outlined" size='large' onClick={() => this.getInfo(this.state.id)}>Get Info</Button>
+            <TextField label="Plant ID" size='small' sx={{mt: 1}} type={'number'} value={id} onChange={(id) => this.setState({id: id.target.value})} />
+            <Button style={{height: '40px'}} sx={{ml: 1, mt: 1}} variant="outlined" size='large' onClick={() => this.getInfo(this.state.id)}>Get Info</Button>
             {tokenInfo &&
               <Box sx={{mt: 2, height: 250}}>
                 <img

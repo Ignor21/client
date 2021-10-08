@@ -2,8 +2,10 @@ import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -99,15 +101,15 @@ class Marketplace extends React.Component {
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Container component="main" sx={{ mt: 4, mb: 2 }} maxWidth="lg">
-            <div>
-              {loaded ?
-                <div>
-                  <div className="Load">
-                    {plants.length} new plants on marketplace
-                  </div>
-                  <div className="Load">
+            {loaded ?
+              <Box>
+                <Container align='center' component="main" sx={{ mb: 1 }} maxWidth="md">
+                  <Typography variant="subtitle1">
+                    {plants.length} new plants on marketplace {' '}
                   <Button onClick={this.reload} variant="outlined">Refresh</Button>
-                  </div>
+                  </Typography>
+                </Container>
+                <TableContainer>
                   <Table size="small" stickyHeader>
                     <TableHead>
                       <TableRow>
@@ -140,15 +142,15 @@ class Marketplace extends React.Component {
                       ))}
                     </TableBody>
                   </Table>
-                </div>
-              :
-                <div>
-                  <div className="Load">
-                    Loading... (might take a while)
-                  </div>
-                </div>
-              }
-            </div>
+                </TableContainer>
+              </Box>
+            :
+              <Container align='center' component="main" sx={{ mb: 2 }} maxWidth="md">
+                <Typography variant="subtitle1">
+                  Loading... (might take a while)
+                </Typography>
+              </Container>
+            }
           </Container>
       </Box>
     </ThemeProvider>

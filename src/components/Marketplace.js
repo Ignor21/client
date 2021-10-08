@@ -80,11 +80,11 @@ class Marketplace extends React.Component {
         this.setState({plants})
         break;
       case 'gain':
-        plants.sort((a, b) => b.config.farm.le / b.config.farm.hours - a.config.farm.le / a.config.farm.hours);
+        plants.sort((a, b) => b.le / b.hours - a.le / a.hours);
         this.setState({plants})
         break;
       case 'eff':
-        plants.sort((a, b) => (b.config.farm.le / b.config.farm.hours) / b.endingPrice - (a.config.farm.le / a.config.farm.hours) / a.endingPrice);
+        plants.sort((a, b) => (b.le / b.hours) / b.endingPrice - (a.le / a.hours) / a.endingPrice);
         this.setState({plants})
         break;
       default:
@@ -129,13 +129,13 @@ class Marketplace extends React.Component {
                               {row.id}
                             </a>
                           </TableCell>
-                          <TableCell align='center'>{row.config.stats.type}</TableCell>
+                          <TableCell align='center'>{row.type}</TableCell>
                           <TableCell align='center'>{row.endingPrice}</TableCell>
                           <TableCell align='center'>{this.rounded((date - row.timeSell) / 3600)} hours</TableCell>
-                          <TableCell align='center'>{row.config.farm.le} / {row.config.farm.hours}</TableCell>
-                          <TableCell align='center'>{this.rounded(row.config.farm.le / row.config.farm.hours)}</TableCell>
-                          <TableCell align='center'>{this.rounded((row.config.farm.le / row.config.farm.hours) * 24)}</TableCell>
-                          <TableCell align='center'>{this.rounded((row.endingPrice * 150) / (row.config.farm.le / row.config.farm.hours) / 24)}</TableCell>
+                          <TableCell align='center'>{row.le} / {row.hours}</TableCell>
+                          <TableCell align='center'>{this.rounded(row.le / row.hours)}</TableCell>
+                          <TableCell align='center'>{this.rounded((row.le / row.hours) * 24)}</TableCell>
+                          <TableCell align='center'>{this.rounded((row.endingPrice * 150) / (row.le / row.hours) / 24)}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

@@ -190,9 +190,11 @@ class FarmCalculator extends React.Component {
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Container align='center' component="main" sx={{ mt: 4, mb: 2 }} maxWidth="md">
+            <Box sx={{mb: 1}}>
+              <TextField sx={{mt: 1}} label="Plant ID" size='small' type={'number'} value={id} onChange={(id) => this.setState({id: id.target.value})} />
+              <Button style={{height: '40px'}} sx={{ml: 1, mt: 1}} variant="outlined" size='large' onClick={() => this.addPlant(this.state.id)}>Add plant</Button>
+            </Box>
             <Box sx={{mb: 2}}>
-              <TextField label="Plant ID" size='small' type={'number'} value={id} onChange={(id) => this.setState({id: id.target.value})} />
-              <Button style={{height: '40px'}} sx={{ml: 1}} variant="outlined" size='large' onClick={() => this.addPlant(this.state.id)}>Add plant</Button>
               <Button style={{height: '40px'}} sx={{ml: 2}} variant="outlined" size='large' onClick={() => this.addMama()}>Add mama</Button>
               <Button style={{height: '40px'}} sx={{ml: 1}} variant="outlined" size='large' onClick={() => this.addSapling()}>Add sapling</Button>
             </Box>
@@ -201,28 +203,28 @@ class FarmCalculator extends React.Component {
                 <TableRow>
                   <TableCell align='center'>
                     <Typography variant="subtitle2">
-                      {this.calculateLEperHour().toFixed(4)} LE per hour
+                      {this.calculateLEperHour() > 0 ? this.calculateLEperHour().toFixed(4) : 0} LE per hour
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align='center'>
                     <Typography variant="subtitle2">
-                      {(this.calculateLEperHour() * 24).toFixed(4)} LE per day
+                      {this.calculateLEperHour() > 0 ? (this.calculateLEperHour() * 24).toFixed(4) : 0} LE per day
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align='center'>
                     <Typography variant="subtitle2">
-                      {this.calculatePVUperHour().toFixed(4)} PVU per hour
+                      {this.calculatePVUperHour() > 0 ? this.calculatePVUperHour().toFixed(4) : 0} PVU per hour
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align='center'>
                     <Typography variant="subtitle2">
-                      {(this.calculatePVUperHour() * 24).toFixed(4)} PVU per day
+                      {this.calculatePVUperHour() > 0 ? (this.calculatePVUperHour() * 24).toFixed(4) : 0} PVU per hour
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -231,7 +233,7 @@ class FarmCalculator extends React.Component {
             <Box sx={{mt: 2}}>
             <Grid container spacing={2}>
               {farm.map((item) => (
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                   <Item>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="subtitle2">{item.tokenId}</Typography>

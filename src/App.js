@@ -130,7 +130,7 @@ class App extends React.Component {
                     onClick={event => this.setState({anchorEl2: event.currentTarget})}
                   >
                     <Typography variant="body2" color="white" sx={{ pl: 1, flexShrink: 0 }}>
-                      PVP
+                      Game
                     </Typography>
                     <ArrowDropDown style={{fill: "white"}} />
                   </Button>

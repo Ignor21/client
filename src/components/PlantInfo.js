@@ -87,7 +87,6 @@ class PlantInfo extends React.Component {
   };
 
   calculateLE = (baseLE, rarityNum, rarity, step) => {
-    console.log(baseLE, rarityNum, rarity, step)
     let lowestRarity;
     // eslint-disable-next-line default-case
     switch (rarityNum) {
@@ -569,6 +568,5 @@ const PlantInfoMap = [
 		type: "Mother tree"
 	}
 ];
-
 
 export default PlantInfo;
